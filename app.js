@@ -18,7 +18,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "assets/views"));
 app.use(express.static('assets'))
-app.use(session({secret:'GitHubRocks'}));
+app.use(session({secret:process.env.APP_SESSION_SECRET}));
 
 // Routes
 app.use('/', home);

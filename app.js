@@ -22,7 +22,7 @@ app.use(express.static('assets'))
 app.use(session({secret:process.env.APP_SESSION_SECRET}));
 
 // Rate limit
-var limiter = new rateLimit({
+var limiter = rateLimit({
   windowMs: 60*60*1000, // 1 hour
   max: 1000 // https://docs.github.com/en/rest/overview/resources-in-the-rest-api?apiVersion=2022-11-28#rate-limiting
 });

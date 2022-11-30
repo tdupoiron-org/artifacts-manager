@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GitHub</title>
+        <link rel="stylesheet" href="css/app.css" />
+    </head>
+    <body>
+        <h1>GitHub</h1>
+        <% if(token){ %>
+            <div class="github" onclick="location.href='logout'">
+                <img class="badge-logo" src="img/github-logo-white.svg" alt="GitHub">
+                <span class="badge-text">Logout</span>
+            </div>
+            <div>Token : <%= token %></div>
+          <% } else{ %>
+            <div class="github" onclick="location.href='login'">
+                <img class="badge-logo" src="img/github-logo-white.svg" alt="GitHub">
+                <span class="badge-text">Sign in to GitHub</span>
+            </div>
+         <% } %>
+    </body>
+</html>

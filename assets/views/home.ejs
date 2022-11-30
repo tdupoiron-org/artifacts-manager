@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GitHub</title>
+        <link rel="stylesheet" href="css/app.css" />
+    </head>
+    <body>
+        <h1>GitHub Artifacts</h1>
+        <% if(scope.token){ %>
+            <div class="github">
+                <img class="badge-logo" src="img/github-logo-white.svg" alt="GitHub">
+                <span class="badge-text"><a target="_blank" href="https://github.com/<%= scope.user.login %>">@<%= scope.user.login %></a> - <a href="logout">Logout</a></span>
+            </div>
+            <div>Token : <%= scope.token %></div>
+          <% } else{ %>
+            <div class="github">
+                <img class="badge-logo" src="img/github-logo-white.svg" alt="GitHub">
+                <span class="badge-text"><a href="login">Sign in to GitHub</a></span>
+            </div>
+         <% } %>
+    </body>
+</html>

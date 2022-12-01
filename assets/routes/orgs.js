@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const { Octokit } = require("@octokit/rest");
+const { render } = require('ejs');
 
 const router = express.Router();
 
@@ -12,6 +13,9 @@ dotenv.config({
 
 const octokit = new Octokit();
 
+var scope = {};
+
+// Get organizations
 router.get(process.env.APP_ORGS_URI, (req, res) => {
 
     ssn=req.session;
@@ -26,14 +30,16 @@ router.get(process.env.APP_ORGS_URI, (req, res) => {
             authorization: `token ${token}`,
         },
     }).then(({ data }) => {
-        console.log(data);
-        res.render("orgs", {orgs: data});
+        scope.orgs = data;
+        res.render("orgs", {scope: scope});
     }).catch((error) => {
-        console.log(error);
+        //console.log(error);
+        const appBaseUrl = req.protocol + '://' + req.hostname + ':' + req.socket.localPort;
+
+        ssn=req.session;
+        ssn.githubAccessToken = null;
+        res.redirect(appBaseUrl + process.env.APP_LOGIN_URI);
     });
-
 });
-
-
 
 module.exports = router;

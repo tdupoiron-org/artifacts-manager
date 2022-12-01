@@ -1,17 +1,6 @@
-<h1>GitHub Artifacts</h1>
-
 <% if(scope.token){ %>
-
-    <div class="github">
-        <img class="badge-logo" src="img/github-logo-white.svg" alt="GitHub">
-        <span class="badge-text"><a target="_blank" href="https://github.com/<%= scope.user.login %>">@<%= scope.user.login %></a> - <a href="logout">Logout</a></span>
-    </div>
-
+    Welcome @<%= scope.user.login %>
+    <button type="button" class="btn btn-dark" onclick="location.href='logout'">Logout</button>
 <% } else{ %>
-
-    <div class="github">
-        <img class="badge-logo" src="img/github-logo-white.svg" alt="GitHub">
-        <span class="badge-text"><a href="login">Sign in to GitHub</a></span>
-    </div>
-
+    <button type="button" class="btn btn-dark" onclick="location.href='login'">Sign in to GitHub</button>
 <% } %>

@@ -4,11 +4,23 @@
         <title>GitHub Artifacts</title>
         <link rel="stylesheet" href="css/bootstrap.min.css" />
         <link rel="stylesheet" href="css/app.css" />
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.css">
     </head>
     <body>
 
+        <h1>GitHub Artifacts</h1>
+
         <%- include('header.ejs') %>
-        <button type="button" class="btn btn-outline-secondary" onclick="location.href = 'orgs'">Fetch Organizations</button>
+        <content>
+            <orgs></orgs>
+        </content>
+
+        <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+        <script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+        <script src="https://unpkg.com/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="../js/pretty-bytes.js"></script>
+        <script src="../js/app.js"></script>
 
     </body>
 </html>

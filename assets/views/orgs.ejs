@@ -1,34 +1,29 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>GitHub Artifacts</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/app.css" />
+<% if(scope.orgs){ %>
+    <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Organizations
+        </button>
+        <ul class="dropdown-menu">
+            <% for(var i=0; i<scope.orgs.length; i++){ %>
+                <li class="dropdown-item" onclick="fetchArtifacts('<%= scope.orgs[i].login %>')"><%= scope.orgs[i].login %></li>
+            <% } %>
+        </ul>
+    </div>
 
-    </head>
-    <body>
+</br>
+    <artifacts>
+        <table id="table" class="table">
+            <thead class="table-dark">
+            </thead>
+        </table>
+    </artifacts>
+</br>
+    <div id="totalSize"></div>
 
-        <% if(scope.orgs){ %>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Organizations
-                </button>
-                <ul class="dropdown-menu">
-                    <% for(var i=0; i<scope.orgs.length; i++){ %>
-                        <li class="dropdown-item" ><%= scope.orgs[i].login %></li>
-                    <% } %>
-                </ul>
-              </div>
-        
-        <% }else{ %>
-        
-            <orgs>
-                <button type="button" class="btn btn-primary">Fetch Organizations</button>
-            </orgs>
-        
-        <% } %>
+<% }else{ %>
 
-        <script src="../js/bootstrap.bundle.min.js"></script>
+    <div>
+    <button type="button" class="btn btn-light" onclick="fetchOrgs()">Fetch Organizations</button>
+    </div>
 
-    </body>
-</html>
+<% } %>

@@ -6,21 +6,22 @@ const { resolve } = require('path');
 const router = express.Router();
 const octokit = new Octokit();
 
-var scope = {};
-
 // Serve the home.ejs file
 router.get('/', (req, res) => {
-  ssn=req.session;
-  githubAccessToken = ssn.githubAccessToken;
-  scope.token = githubAccessToken;
+
+  var scope = {};
+
+  let githubAccessToken = req.cookies['token'];
 
   if (githubAccessToken) {
 
+    scope.token = githubAccessToken;
+
     const userPromise = octokit.rest.users.getAuthenticated(
       {
-          headers: {
-              authorization: `token ${githubAccessToken}`,
-          },
+        headers: {
+          authorization: `token ${githubAccessToken}`,
+        },
       }).then(({ data }) => {
         scope.user = data;
         return data;

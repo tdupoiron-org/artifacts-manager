@@ -7,8 +7,8 @@ const cookieParser = require('cookie-parser');
 // Load modules
 const home = require('./assets/routes/home');
 const auth = require('./assets/routes/auth');
-const orgs = require('./assets/routes/orgs');
-const artifacts = require('./assets/routes/artifacts');
+//const orgs = require('./assets/routes/orgs');
+//const artifacts = require('./assets/routes/artifacts');
 const api = require('./assets/routes/api');
 
 // Load environment variables
@@ -21,7 +21,9 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "assets/views"));
 app.use(express.static('assets'));
-app.use(express.static('node_modules'));
+app.use("jquery", express.static('./node_modules/jquery/dist'));
+app.use("bootstrap", express.static('./node_modules/bootstrap/dist'));
+
 app.use(cookieParser());
 
 // Rate limit
@@ -34,8 +36,8 @@ app.use('/', limiter)
 // Routes
 app.use('/', home);
 app.use('/', auth);
-app.use('/', orgs);
-app.use('/', artifacts);
+//app.use('/', orgs);
+//app.use('/', artifacts);
 app.use('/api', api);
 
 // Start the server

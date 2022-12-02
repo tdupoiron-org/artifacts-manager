@@ -1,22 +1,29 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>GitHub</title>
-        <link rel="stylesheet" href="css/app.css" />
-    </head>
-    <body>
-        <h1>GitHub</h1>
-        <% if(token){ %>
-            <div class="github" onclick="location.href='logout'">
-                <img class="badge-logo" src="img/github-logo-white.svg" alt="GitHub">
-                <span class="badge-text">Logout</span>
-            </div>
-            <div>Token : <%= token %></div>
-          <% } else{ %>
-            <div class="github" onclick="location.href='login'">
-                <img class="badge-logo" src="img/github-logo-white.svg" alt="GitHub">
-                <span class="badge-text">Sign in to GitHub</span>
-            </div>
-         <% } %>
-    </body>
-</html>
+<% if(scope.orgs){ %>
+    <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Organizations
+        </button>
+        <ul class="dropdown-menu">
+            <% for(var i=0; i<scope.orgs.length; i++){ %>
+                <li class="dropdown-item" onclick="fetchArtifacts('<%= scope.orgs[i].login %>')"><%= scope.orgs[i].login %></li>
+            <% } %>
+        </ul>
+    </div>
+
+</br>
+    <artifacts>
+        <table id="table" class="table">
+            <thead class="table-dark">
+            </thead>
+        </table>
+    </artifacts>
+</br>
+    <div id="totalSize"></div>
+
+<% }else{ %>
+
+    <div>
+    <button type="button" class="btn btn-light" onclick="fetchOrgs()">Fetch Organizations</button>
+    </div>
+
+<% } %>

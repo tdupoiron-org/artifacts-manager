@@ -1,0 +1,6 @@
+<% if(scope.token){ %>
+    Welcome @<%= scope.user.login %>
+    <button type="button" class="btn btn-dark" onclick="location.href='logout'">Logout</button>
+<% } else{ %>
+    <button type="button" class="btn btn-dark" onclick="location.href='login'">Sign in to GitHub</button>
+<% } %>

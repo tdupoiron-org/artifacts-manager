@@ -37,10 +37,7 @@ router.get(process.env.APP_CALLBACK_URI, (req, res) => {
       'Accept-Encoding': 'application/json',
     }
   }).then(function (response) {
-
-    ssn=req.session;
-    ssn.githubAccessToken = response.data.access_token;
-
+    res.cookie('token', response.data.access_token);
     res.redirect(appBaseUrl);
   }
   ).catch(function (error) {
@@ -53,8 +50,7 @@ router.get(process.env.APP_CALLBACK_URI, (req, res) => {
 router.get(process.env.APP_LOGOUT_URI, (req, res) => {
   const appBaseUrl = req.protocol + '://' + req.hostname + ':' + req.socket.localPort;
 
-  ssn=req.session;
-  ssn.githubAccessToken = null;
+  res.clearCookie('token');
   res.redirect(appBaseUrl);
 
 });

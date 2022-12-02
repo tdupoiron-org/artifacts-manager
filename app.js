@@ -1,13 +1,15 @@
 const express = require('express');
-const session = require('express-session');
 const path = require('path');
 const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
+const cookieParser = require('cookie-parser');
 
 // Load modules
 const home = require('./assets/routes/home');
 const auth = require('./assets/routes/auth');
 const orgs = require('./assets/routes/orgs');
+const artifacts = require('./assets/routes/artifacts');
+const api = require('./assets/routes/api');
 
 // Load environment variables
 dotenv.config({
@@ -18,8 +20,9 @@ dotenv.config({
 const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "assets/views"));
-app.use(express.static('assets'))
-app.use(session({secret:process.env.APP_SESSION_SECRET}));
+app.use(express.static('assets'));
+app.use(express.static('node_modules'));
+app.use(cookieParser());
 
 // Rate limit
 var limiter = rateLimit({
@@ -32,6 +35,8 @@ app.use('/', limiter)
 app.use('/', home);
 app.use('/', auth);
 app.use('/', orgs);
+app.use('/', artifacts);
+app.use('/api', api);
 
 // Start the server
 const PORT = process.env.PORT || 8080;

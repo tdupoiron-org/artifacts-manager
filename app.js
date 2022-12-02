@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session');
 const path = require('path');
 const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
@@ -23,7 +22,6 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "assets/views"));
 app.use(express.static('assets'));
 app.use(express.static('node_modules'));
-app.use(session({secret:process.env.APP_SESSION_SECRET}));
 app.use(cookieParser());
 
 // Rate limit

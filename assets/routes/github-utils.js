@@ -19,7 +19,7 @@ class GitHubUtils{
         }).catch((error) => {
             console.error("Failed to list organizations: ");
         });
-    };
+    }
 
     // List all repositories
     async getRepos(org) {
@@ -32,7 +32,7 @@ class GitHubUtils{
         }).catch((error) => {
             console.error("Failed to list repositories for organization " + org);
         });
-    };
+    }
 
     // List all artifacts
     async getArtifacts(org, repo) {
@@ -45,7 +45,23 @@ class GitHubUtils{
         }).catch((error) => {
             console.error("Failed to retrieve artifacts for repo " + repo);
         });
-    };
+    }
+
+    // Delete artifact
+    async deleteArtifact(owner, repo, artifactId) {
+
+        return this.octokit.rest.actions.deleteArtifact({
+            owner: owner,
+            repo: repo,
+            artifact_id: artifactId
+        }).then(({ data, headers, status }) => {
+            return data;
+        }).catch((error) => {
+            console.log(error);
+            console.error("Failed to delete artifact " + artifactId);
+        });
+    }
+
 }
 
 module.exports = GitHubUtils;

@@ -103,4 +103,29 @@ router.get(process.env.APP_ARTIFACTS_URI, async (req, res) => {
 
 });
 
+// Delete artifact
+router.post(process.env.APP_ARTIFACTS_DELETE_URI, async (req, res) => {
+
+    var scope = {};
+
+    const appBaseUrl = req.protocol + '://' + req.hostname + ':' + req.socket.localPort;
+    token = req.cookies['token'];
+    owner = req.body.owner;
+    repo = req.body.repo;
+    artifactId = req.body.artifactId;
+
+    if (token) {
+
+        const gitHubUtils = new GitHubUtils(token);
+
+        gitHubUtils.deleteArtifact(owner, repo, artifactId).then((data) => {
+            res.send(data);
+        });
+
+    } else {
+        res.end();
+    }
+
+});
+
 module.exports = router;

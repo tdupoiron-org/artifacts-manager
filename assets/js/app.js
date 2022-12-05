@@ -72,11 +72,36 @@ async function fetchArtifacts(org) {
             formatter: function (value, row, index) {
                 return new Date(value).toLocaleString();
             }
+        }, {
+            field: 'actions',
+            title: 'Actions',
+            sortable: false,
+            formatter: function (value, row, index) {
+                return '<button type="button" class="btn btn-danger btn-sm" onclick="deleteArtifact(\'' + row.artifactId + '\', \'' + row.repoName + '\', \'' + row.repoOwnerLogin + '\');">Delete</button>';
+            }
         }]
     });
 
     $("#totalSize").html('<div class="alert alert-success" role="alert">Total size : ' + prettyBytes(artifactsHtml.data.totalSize) + '</div>');
     $("#totalSize").show();
+
+}
+
+async function deleteArtifact(artifactId, repo, owner) {
+
+    var base_url = window.location.origin;
+
+    body = {
+        'artifactId': artifactId,
+        'repo': repo,
+        'owner': owner
+    }
+
+    const deleteArtifact = await axios.post(base_url + '/api/artifacts/delete', body);
+
+    console.log(deleteArtifact);
+
+    fetchArtifacts(owner);
 
 }
 

@@ -3,6 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser')
 
 // Load modules
 const home = require('./assets/routes/home');
@@ -25,6 +26,7 @@ app.use("jquery", express.static('./node_modules/jquery/dist'));
 app.use("bootstrap", express.static('./node_modules/bootstrap/dist'));
 
 app.use(cookieParser());
+app.use(bodyParser.json())
 
 // Rate limit
 var limiter = rateLimit({

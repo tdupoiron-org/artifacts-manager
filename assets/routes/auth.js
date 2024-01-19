@@ -4,10 +4,15 @@ const dotenv = require('dotenv');
 
 const router = express.Router();
 
+console.log("API auth loaded");
+
 // Load environment variables
 dotenv.config({
   path: './config.env',
 });
+
+console.log("Environment variables loaded");
+console.log(process.env);
 
 // Redirect to GitHub login
 router.get(process.env.APP_LOGIN_URI, (req, res) => {

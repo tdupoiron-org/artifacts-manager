@@ -1,20 +1,19 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const { Octokit } = require("@octokit/rest");
-const { render } = require('ejs');
 const GitHubUtils = require('./github-utils');
 
 const router = express.Router();
 
 // Load environment variables
 dotenv.config({
-    path: './config.env',
-  });
+path: './config.env',
+});
 
-const octokit = new Octokit();
+console.log("API routes loaded");
 
 // Get organizations
-router.get(process.env.APP_ORGS_URI, async (req, res) => {
+router.get("/orgs", async (req, res) => {
 
     var scope = {};
 

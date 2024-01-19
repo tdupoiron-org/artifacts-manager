@@ -1,10 +1,10 @@
 const express = require('express');
-const axios = require('axios');
 const { Octokit } = require("@octokit/rest");
-const { resolve } = require('path');
 
 const router = express.Router();
 const octokit = new Octokit();
+
+console.log("API home loaded");
 
 // Serve the home.ejs file
 router.get('/', (req, res) => {

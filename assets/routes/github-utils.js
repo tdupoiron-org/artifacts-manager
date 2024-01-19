@@ -12,7 +12,6 @@ class GitHubUtils{
 
     // List organizations
     async getOrgs() {
-        console.log("call");
         return this.octokit.rest.orgs.listForAuthenticatedUser({
         }).then(({ data, headers, status }) => {
             return data;

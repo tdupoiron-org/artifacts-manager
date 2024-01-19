@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 
 const router = express.Router();
 
+console.log("API auth loaded");
+
 // Load environment variables
 dotenv.config({
   path: './config.env',
